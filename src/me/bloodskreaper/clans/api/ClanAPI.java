@@ -6,9 +6,9 @@ import me.bloodskreaper.clans.ClanMember;
 import me.bloodskreaper.clans.Main;
 
 
-public class API {
+public class ClanAPI {
 	
-	public API(){
+	public ClanAPI(){
 		
 	}
 	
