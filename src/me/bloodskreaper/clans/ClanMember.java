@@ -16,6 +16,10 @@ public class ClanMember {
 		return clan;
 	}
 	
+	public UUID getUUID(){
+		return uuid;
+	}
+	
 	public String getClanPrefix(){
 		return clan.getClanDisplayName();
 	}
