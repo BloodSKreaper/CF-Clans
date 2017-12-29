@@ -2,67 +2,63 @@ package me.bloodskreaper.clans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Clan {
+	/*
+	 * name = Name des Clans
+	 * displayname = Abkürzung für den Clan
+	 * leader = Teamleiter
+	 * members = alle Clanmitglieder einschließlich des Leaders
+	 */
 	private String name;
 	private String displayname;
-	private List<ClanMember> members = new ArrayList<ClanMember>(15);
+	private UUID leader;
+	private List<UUID> members = new ArrayList<UUID>();
 	
-	public Clan(String name, ClanMember leader){
+	public Clan(String name, UUID leader){
 		this.name = name;
-		members.add(leader);
-		members.set(0, leader);
+		this.leader = leader;
 	}
 	
-	public Clan(String name, String displayname, ArrayList<ClanMember> members){
+	public Clan(String name, String displayname, UUID leader, ArrayList<UUID> members){
 		this.name = name;
 		this.displayname = displayname;
 		this.members = members;
+		this.leader = leader;
 	}
-	
-	public void setClanDisplayName(String displayname){
+
+	public void setName(String name){
+		this.name = name;
+	}	
+	public void setDisplayName(String displayname){
 		this.displayname = displayname;
-	}
-	
-	public String getClanDisplayName(){
-		return displayname;
-	}
-	
-	public ClanMember getLeader(){
-		return members.get(0);
+	}	
+	public void setLeader(UUID leader) {
+		this.leader = leader;
+	}	
+	public void setMembers(List<UUID> members) {
+		this.members = members;
 	}
 	
 	public String getName(){
 		return name;
-	}
-	
-	public boolean setLeader(ClanMember leader){
-		if(members.contains(leader)&&members.get(0) != leader){
-			members.set(0, leader);
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	
-	
-	public boolean addMember(ClanMember member){
-		if(members.add(member))return true;
-		return false;
-	}
-	
-	public boolean removeMember(ClanMember member){
-		boolean result = false;
-		if(member != members.get(0))
-		result = members.remove(member);
-		return result;
-	}
-	
-	public List<ClanMember> getMembers(){
+	}	
+	public String getClanDisplayName(){
+		return displayname;
+	}	
+	public UUID getLeader(){
+		return leader;
+	}	
+	public List<UUID> getMembers(){
 		return members;
 	}
 	
-	
+	public void addMember(UUID member){
+		members.add(member);
+	}	
+	public void removeMember(UUID member){
+		members.remove(member);
+	}
 
 }
