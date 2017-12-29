@@ -12,20 +12,23 @@ public class Clan {
 	 * members = alle Clanmitglieder einschlieﬂlich des Leaders
 	 */
 	private String name;
+	private UUID clanUUID;
 	private String displayname;
 	private UUID leader;
-	private List<UUID> members = new ArrayList<UUID>();
+	private List<String> members = new ArrayList<String>();
 	
 	public Clan(String name, UUID leader){
+		clanUUID = UUID.randomUUID();
 		this.name = name;
 		this.leader = leader;
 	}
 	
-	public Clan(String name, String displayname, UUID leader, ArrayList<UUID> members){
+	public Clan(UUID clanUUID, String name, String displayname, UUID leader, List<String> members){
 		this.name = name;
 		this.displayname = displayname;
 		this.members = members;
 		this.leader = leader;
+		this.clanUUID = clanUUID;
 	}
 
 	public void setName(String name){
@@ -37,28 +40,31 @@ public class Clan {
 	public void setLeader(UUID leader) {
 		this.leader = leader;
 	}	
-	public void setMembers(List<UUID> members) {
+	public void setMembers(List<String> members) {
 		this.members = members;
 	}
 	
 	public String getName(){
 		return name;
-	}	
+	}
+	public UUID getClanUUID(){
+		return clanUUID;
+	}
 	public String getClanDisplayName(){
 		return displayname;
 	}	
 	public UUID getLeader(){
 		return leader;
 	}	
-	public List<UUID> getMembers(){
+	public List<String> getMembers(){
 		return members;
 	}
 	
 	public void addMember(UUID member){
-		members.add(member);
+		members.add(member.toString());
 	}	
 	public void removeMember(UUID member){
-		members.remove(member);
+		members.remove(member.toString());
 	}
 
 }

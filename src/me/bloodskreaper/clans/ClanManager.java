@@ -1,7 +1,6 @@
 package me.bloodskreaper.clans;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +15,23 @@ public class ClanManager {
 	
 	public boolean removeClan(Clan clan){
 		return clans.remove(clan);
+	}
+	public List<Clan> getClans(){
+		return clans;
+	}
+	
+	public Clan getClanOfMember(UUID uuid) {
+		Clan result = null;
+		for(Clan c: clans) {
+			for(String id: c.getMembers()) {
+				if(id.equalsIgnoreCase(uuid.toString())) {
+					result = c;
+					break;
+				}
+				
+			}
+		}
+		return result;
 	}
 
 }
