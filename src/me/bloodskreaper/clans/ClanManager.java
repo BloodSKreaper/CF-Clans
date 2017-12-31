@@ -33,5 +33,13 @@ public class ClanManager {
 		}
 		return result;
 	}
+	
+	public Clan getClanFromName(String s) {
+		Clan result = null;
+		for(Clan c: clans) {
+			if(c.getName().equalsIgnoreCase(s)) result = c;
+		}
+		return result;
+	}
 
 }

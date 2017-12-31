@@ -13,12 +13,20 @@ import me.bloodskreaper.clans.Commands.SetPrefix;
 
 public class Main extends JavaPlugin{
 	private static ClanManager cm;
+	private static InviteManager im;
 	private ClanFile cl;
+	private InviteFile in;
 
 	public void onEnable(){
 		cm = new ClanManager();
 		cl = new ClanFile(this);
 		cl.LoadClanData();
+		
+		im = new InviteManager();
+		in = new InviteFile(this);
+		in.LoadInviteData();
+		
+		
 		this.registerCommands();
 	}
 	
@@ -29,6 +37,10 @@ public class Main extends JavaPlugin{
 	
 	public static ClanManager getClanManager(){
 		return cm;
+	}
+	
+	public static InviteManager getInviteManager() {
+		return im;
 	}
 	
     public void registerCommands() {
