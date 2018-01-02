@@ -41,5 +41,14 @@ public class ClanManager {
 		}
 		return result;
 	}
+	
+	public Clan getClanFromUUID(UUID uuid) {
+		Clan result = null;
+		for(Clan c: clans) {
+			if(c.getClanUUID() == uuid) result = c;
+		}
+		return result;
+		
+	}
 
 }

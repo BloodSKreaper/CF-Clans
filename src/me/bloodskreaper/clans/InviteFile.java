@@ -33,7 +33,7 @@ public class InviteFile {
 		if(inviteuuids.size()!=0) {
 			for(String uuid: inviteuuids) {
 				if(Main.getClanManager().getClanFromName(data.getString(uuid+".clan"))!= null) {			
-					Invite created = new Invite(UUID.fromString(uuid), data.getLong(uuid+".created"), UUID.fromString(data.getString(uuid+".player")), Main.getClanManager().getClanFromName(data.getString(uuid+".clan")));				
+					Invite created = new Invite(UUID.fromString(uuid), data.getLong(uuid+".created"), UUID.fromString(data.getString(uuid+".player")), Main.getClanManager().getClanFromUUID(UUID.fromString(data.getString(uuid+".clan"))));				
 					Main.getInviteManager().addInvite(created);
 				}
 			}
@@ -49,7 +49,7 @@ public class InviteFile {
 			String path = in.getInviteUUID().toString()+".";
 			data.set(path+"created", in.getCreated());
 			data.set(path+"player", in.getPlayer());
-			data.set(path+"clan", in.getClan().getName());
+			data.set(path+"clan", in.getClan().getClanUUID());
 		}
 		saveConfigFile();
 	}
