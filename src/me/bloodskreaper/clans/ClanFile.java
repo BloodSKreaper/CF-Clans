@@ -53,7 +53,7 @@ public class ClanFile {
 		saveConfigFile(async);
 	}
 	public void saveConfigFile(boolean async) {
-		if(async = true) {
+		if(async == true) {
 		Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
 			@Override
 			public void run() {

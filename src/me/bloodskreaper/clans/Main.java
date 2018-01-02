@@ -3,9 +3,11 @@ package me.bloodskreaper.clans;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.bloodskreaper.clans.Commands.AcceptInvite;
 import me.bloodskreaper.clans.Commands.ClanMainCommand;
 import me.bloodskreaper.clans.Commands.CommandHandler;
 import me.bloodskreaper.clans.Commands.CreateClan;
+import me.bloodskreaper.clans.Commands.DenyInvite;
 import me.bloodskreaper.clans.Commands.InviteMember;
 import me.bloodskreaper.clans.Commands.LeaveClan;
 import me.bloodskreaper.clans.Commands.RemoveClan;
@@ -14,7 +16,7 @@ import me.bloodskreaper.clans.Commands.SetLeader;
 import me.bloodskreaper.clans.Commands.SetPrefix;
 
 public class Main extends JavaPlugin{
-	public static String prefix = "§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-CF-Clans§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~";
+	public static String prefix = "§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§8[§6CF-Clans§8]§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~";
 	private static ClanManager cm;
 	private static InviteManager im;
 	private ClanFile cl;
@@ -73,6 +75,8 @@ public class Main extends JavaPlugin{
         handler.register("prefix", new SetPrefix());
         handler.register("remove", new RemoveClan());
         handler.register("leave", new LeaveClan());
+        handler.register("acceptinvite", new AcceptInvite());
+        handler.register("denyinvite", new DenyInvite());
  
         //Registers the command /example args based on args[0] (args)
         getCommand("clan").setExecutor(handler);

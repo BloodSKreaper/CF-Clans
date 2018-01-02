@@ -32,7 +32,8 @@ public class InviteFile {
 		Set<String> inviteuuids = data.getKeys(false);
 		if(inviteuuids.size()!=0) {
 			for(String uuid: inviteuuids) {
-				if(Main.getClanManager().getClanFromName(data.getString(uuid+".clan"))!= null) {			
+				if(Main.getClanManager().getClanFromUUID(UUID.fromString(data.getString(uuid+".clan")))!= null) {
+					
 					Invite created = new Invite(UUID.fromString(uuid), data.getLong(uuid+".created"), UUID.fromString(data.getString(uuid+".player")), Main.getClanManager().getClanFromUUID(UUID.fromString(data.getString(uuid+".clan"))));				
 					Main.getInviteManager().addInvite(created);
 				}
@@ -48,13 +49,13 @@ public class InviteFile {
 		for(Invite in: invites) {
 			String path = in.getInviteUUID().toString()+".";
 			data.set(path+"created", in.getCreated());
-			data.set(path+"player", in.getPlayer());
-			data.set(path+"clan", in.getClan().getClanUUID());
+			data.set(path+"player", in.getPlayer().toString());
+			data.set(path+"clan", in.getClan().getClanUUID().toString());
 		}
 		saveConfigFile(async);
 	}
 	public void saveConfigFile(boolean async) {
-		if(async = true) {
+		if(async == true) {
 			Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
 				@Override
 				public void run() {

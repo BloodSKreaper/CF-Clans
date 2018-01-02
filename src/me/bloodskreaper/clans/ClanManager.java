@@ -53,7 +53,7 @@ public class ClanManager {
 	public Clan getClanFromUUID(UUID uuid) {
 		Clan result = null;
 		for(Clan c: clans) {
-			if(c.getClanUUID() == uuid) result = c;
+			if(c.getClanUUID().equals(uuid)) result = c;
 		}
 		return result;
 		

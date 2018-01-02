@@ -28,10 +28,6 @@ public class LeaveClan implements CommandInterface{
         			Main.sendMessageToPlayer(p, "§aDu hast den Clan §6"+c.getName()+" §averlassen!");
         		}
         	}
-        	/*Testen ob der Spieler in einem Clan ist
-        	 * Testen, ob der Spieler der Leiter eines Clans sowie der letzte Member des Clans ist
-        	 * Testen, ob
-        	 */
         }
         return false;
     }

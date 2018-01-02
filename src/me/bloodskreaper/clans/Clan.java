@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+
 public class Clan {
 	/*
 	 * name = Name des Clans
@@ -66,6 +68,14 @@ public class Clan {
 	}	
 	public void removeMember(UUID member){
 		members.remove(member.toString());
+	}
+	
+	public void sendMessageToAllMembers(String message) {
+		for(String userid: members) {
+			if(Bukkit.getPlayer(UUID.fromString(userid)) != null) {
+				Main.sendMessageToPlayer(Bukkit.getPlayer(UUID.fromString(userid)), message);
+			}
+		}
 	}
 
 }

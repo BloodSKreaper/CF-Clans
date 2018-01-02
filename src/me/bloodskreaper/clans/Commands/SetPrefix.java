@@ -29,10 +29,7 @@ public class SetPrefix  implements CommandInterface {
         			if(Main.getClanManager().getClanOfMember(p.getUniqueId())== null) {
         				Main.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
         			}else {
-        				System.out.println(p.getUniqueId());
         				if(!Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader().equals(p.getUniqueId())) {
-        					System.out.println(p.getUniqueId());
-        					System.out.println(Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader());
         					Main.sendMessageToPlayer(p, "§cDu bist nicht der Admin des Clans und kannst somit nicht den Prefix ändern!");
         				}else {
         					Clan c = Main.getClanManager().getClanOfMember(p.getUniqueId());

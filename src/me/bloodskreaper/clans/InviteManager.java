@@ -36,6 +36,21 @@ public boolean PlayerhasInviteFromClan(UUID uuid, String clanname) {
 	return result;
 }
 
+public List<Invite> getInvitesOfPlayer(UUID uuid){
+	List<Invite> playerinvites= new ArrayList<Invite>();
+	for(Invite in: invites) {
+		if(in.getPlayer().equals(uuid))playerinvites.add(in);
+	}
+	return playerinvites;
+}
+
+public Invite getInvite(UUID player, String clanname) {
+	for(Invite inv: invites) {
+		if(inv.getPlayer().equals(player)&&inv.getClan().getName().equalsIgnoreCase(clanname)) return inv;
+	}
+	return null;
+}
+
 
 
 }
