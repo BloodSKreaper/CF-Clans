@@ -21,6 +21,7 @@ public class Clan {
 		clanUUID = UUID.randomUUID();
 		this.name = name;
 		this.leader = leader;
+		members.add(leader.toString());
 	}
 	
 	public Clan(UUID clanUUID, String name, String displayname, UUID leader, List<String> members){

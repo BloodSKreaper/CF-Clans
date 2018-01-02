@@ -42,6 +42,14 @@ public class ClanManager {
 		return result;
 	}
 	
+	public Clan getClanFromPrefix(String s) {
+		Clan result = null;
+		for(Clan c: clans) {
+			if(c.getClanDisplayName() != null &&c.getClanDisplayName().equalsIgnoreCase(s)) result = c;
+		}
+		return result;
+	}
+	
 	public Clan getClanFromUUID(UUID uuid) {
 		Clan result = null;
 		for(Clan c: clans) {

@@ -38,7 +38,7 @@ public class ClanFile {
 		}
 	}
 	
-	public void SaveToYamlConfig() {
+	public void SaveToYamlConfig(boolean async) {
 		List<Clan> clans = Main.getClanManager().getClans();
 		for(String s:data.getKeys(false)) {
 			data.set(s, null);
@@ -50,9 +50,10 @@ public class ClanFile {
 			data.set(path+"leader", c.getLeader().toString());
 			data.set(path+"members", c.getMembers());
 		}
-		saveConfigFile();
+		saveConfigFile(async);
 	}
-	public void saveConfigFile() {
+	public void saveConfigFile(boolean async) {
+		if(async = true) {
 		Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
 			@Override
 			public void run() {
@@ -63,6 +64,13 @@ public class ClanFile {
 				}
 			}
 		});
+		}else {
+			try {
+				data.save(datafile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 

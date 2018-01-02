@@ -1,0 +1,9 @@
+name: CF-Clans
+version: 1.0
+author: ChrisOchs
+
+main: me.bloodskreaper.clans.Main
+
+commands:
+  clan:
+    usage: /<command>

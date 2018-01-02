@@ -1,17 +1,20 @@
 package me.bloodskreaper.clans;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.bloodskreaper.clans.Commands.ClanMainCommand;
 import me.bloodskreaper.clans.Commands.CommandHandler;
 import me.bloodskreaper.clans.Commands.CreateClan;
 import me.bloodskreaper.clans.Commands.InviteMember;
+import me.bloodskreaper.clans.Commands.LeaveClan;
 import me.bloodskreaper.clans.Commands.RemoveClan;
 import me.bloodskreaper.clans.Commands.RemoveMember;
 import me.bloodskreaper.clans.Commands.SetLeader;
 import me.bloodskreaper.clans.Commands.SetPrefix;
 
 public class Main extends JavaPlugin{
+	public static String prefix = "§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-CF-Clans§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~";
 	private static ClanManager cm;
 	private static InviteManager im;
 	private ClanFile cl;
@@ -31,6 +34,8 @@ public class Main extends JavaPlugin{
 	}
 	
 	public void onDisable() {
+		cl.SaveToYamlConfig(false);
+		in.SaveToYamlConfig(false);
 		
 	}
 	
@@ -67,9 +72,16 @@ public class Main extends JavaPlugin{
         handler.register("leader", new SetLeader());
         handler.register("prefix", new SetPrefix());
         handler.register("remove", new RemoveClan());
+        handler.register("leave", new LeaveClan());
  
         //Registers the command /example args based on args[0] (args)
         getCommand("clan").setExecutor(handler);
+    }
+    
+    public static void sendMessageToPlayer(Player p, String message) {
+    	p.sendMessage("");
+    	p.sendMessage(prefix);
+    	p.sendMessage(message);
     }
 
 }

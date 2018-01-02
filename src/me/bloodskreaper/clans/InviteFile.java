@@ -40,7 +40,7 @@ public class InviteFile {
 		}
 	}
 	
-	public void SaveToYamlConfig() {
+	public void SaveToYamlConfig(boolean async) {
 		List<Invite> invites = Main.getInviteManager().getInvites();
 		for(String s:data.getKeys(false)) {
 			data.set(s, null);
@@ -51,20 +51,30 @@ public class InviteFile {
 			data.set(path+"player", in.getPlayer());
 			data.set(path+"clan", in.getClan().getClanUUID());
 		}
-		saveConfigFile();
+		saveConfigFile(async);
 	}
-	public void saveConfigFile() {
-		Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
-			@Override
-			public void run() {
+	public void saveConfigFile(boolean async) {
+		if(async = true) {
+			Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
+				@Override
+				public void run() {
+					try {
+						data.save(datafile);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			}else {
 				try {
 					data.save(datafile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-		});
+			
+		}
 		
-	}
+	
 
 }
