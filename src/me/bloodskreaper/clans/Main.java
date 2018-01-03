@@ -8,6 +8,7 @@ import me.bloodskreaper.clans.Commands.ClanMainCommand;
 import me.bloodskreaper.clans.Commands.CommandHandler;
 import me.bloodskreaper.clans.Commands.CreateClan;
 import me.bloodskreaper.clans.Commands.DenyInvite;
+import me.bloodskreaper.clans.Commands.HelpCommand;
 import me.bloodskreaper.clans.Commands.InviteMember;
 import me.bloodskreaper.clans.Commands.LeaveClan;
 import me.bloodskreaper.clans.Commands.DeleteClan;
@@ -80,6 +81,7 @@ public class Main extends JavaPlugin{
         handler.register("leave", new LeaveClan());
         handler.register("acceptinvite", new AcceptInvite());
         handler.register("denyinvite", new DenyInvite());
+        handler.register("help", new HelpCommand());
  
         //Registers the command /example args based on args[0] (args)
         getCommand("clan").setExecutor(handler);

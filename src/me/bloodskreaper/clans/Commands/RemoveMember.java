@@ -11,7 +11,8 @@ import me.bloodskreaper.clans.Main;
 public class RemoveMember  implements CommandInterface {
 
 	 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public boolean onCommand(CommandSender sender, Command cmd,
             String commandLabel, String[] args) {
         Player p = (Player) sender;
@@ -37,7 +38,7 @@ public class RemoveMember  implements CommandInterface {
         						if(!Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader().equals(p.getUniqueId())) {
         							Main.sendMessageToPlayer(p, "§cDu bist nicht der Admin des Clans und kannst somit keine Member entfernen!");
         						}else {
-        							if(target.equals(Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader())) {
+        							if(target.getUniqueId().equals(Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader())) {
         								Main.sendMessageToPlayer(p, "§cDer Admin kann nicht aus dem Clan entfernt werden!");
         							}else {
         								Main.getClanManager().getClanOfMember(p.getUniqueId()).removeMember(target.getUniqueId());

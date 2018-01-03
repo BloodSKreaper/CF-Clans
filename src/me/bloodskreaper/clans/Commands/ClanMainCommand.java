@@ -35,6 +35,7 @@ public class ClanMainCommand implements CommandInterface{
         		if(c.getLeader().equals(p.getUniqueId())) role ="§6Admin";
         		if(!c.getLeader().equals(p.getUniqueId())) role ="§6Mitglied";        		
         		p.sendMessage("§aDeine Rolle: "+role );
+        		p.sendMessage("§aClan-Admin: §6"+Bukkit.getOfflinePlayer(c.getLeader()).getName());
         		p.sendMessage("§aAlle Mitglieder:");
         		p.sendMessage(UUIDListToCommaString(c.getMembers()));
         	}
@@ -49,8 +50,9 @@ public class ClanMainCommand implements CommandInterface{
         		Clan c = Main.getClanManager().getClanOfMember(p.getUniqueId());
         		p.sendMessage("§aEinladungen deines Clans:");
         		if(Main.getInviteManager().getInvitesOfClan(c).size()>0) {
-        			p.sendMessage(InviteListToCommaStringClan(Main.getInviteManager().getInvitesOfClan(c)));
-        		
+        			p.sendMessage(InviteListToCommaStringClan(Main.getInviteManager().getInvitesOfClan(c)));        		
+        		}else {
+        			p.sendMessage("§cKeine Einladungen vorhanden.");
         		}
         	}
         	
