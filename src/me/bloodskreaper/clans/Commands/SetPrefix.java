@@ -20,8 +20,8 @@ public class SetPrefix  implements CommandInterface {
         }else if(args.length>2) {
         	Main.sendMessageToPlayer(p, "§cFalsches Format! Format: §b/clan create <CLANPREFIX>");
         }else {
-        	if(args[1].length() <2 || args[1].length() >16) {
-        		Main.sendMessageToPlayer(p, "§cDer Name ist entweder zu lang oder zu kurz. Er muss aus 2 bis 4 Zeichen bestehen.");
+        	if(args[1].length() <2 || args[1].length() >6) {
+        		Main.sendMessageToPlayer(p, "§cDer Prefix ist entweder zu lang oder zu kurz. Er muss aus 2 bis 4 Zeichen bestehen.");
         	}else {
         		if(Main.getClanManager().getClanFromPrefix(args[1])!= null) {
         			Main.sendMessageToPlayer(p, "§cDer Prefix ist bereits für einen anderen Clan vergeben!");

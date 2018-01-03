@@ -16,7 +16,6 @@ public class DenyInvite implements CommandInterface{
     @Override
     public boolean onCommand(CommandSender sender, Command cmd,
             String commandLabel, String[] args) {
-    	System.out.println(Main.getInviteManager().getInvites());
         Player p = (Player) sender;
         if(args.length == 1) {
         	if(!Main.getInviteManager().isInvited(p.getUniqueId())) {

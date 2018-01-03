@@ -10,7 +10,7 @@ import me.bloodskreaper.clans.Commands.CreateClan;
 import me.bloodskreaper.clans.Commands.DenyInvite;
 import me.bloodskreaper.clans.Commands.InviteMember;
 import me.bloodskreaper.clans.Commands.LeaveClan;
-import me.bloodskreaper.clans.Commands.RemoveClan;
+import me.bloodskreaper.clans.Commands.DeleteClan;
 import me.bloodskreaper.clans.Commands.RemoveMember;
 import me.bloodskreaper.clans.Commands.SetLeader;
 import me.bloodskreaper.clans.Commands.SetPrefix;
@@ -67,13 +67,12 @@ public class Main extends JavaPlugin{
          */
         //Registers the command /example which has no arguments.
         handler.register("clan", new ClanMainCommand());
-        handler.register("delete", new RemoveClan());
+        handler.register("delete", new DeleteClan());
         handler.register("invite", new InviteMember());
         handler.register("create", new CreateClan());
         handler.register("remove", new RemoveMember());
         handler.register("leader", new SetLeader());
         handler.register("prefix", new SetPrefix());
-        handler.register("remove", new RemoveClan());
         handler.register("leave", new LeaveClan());
         handler.register("acceptinvite", new AcceptInvite());
         handler.register("denyinvite", new DenyInvite());

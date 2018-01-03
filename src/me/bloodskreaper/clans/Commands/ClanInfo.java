@@ -11,10 +11,8 @@ import org.bukkit.entity.Player;
 import me.bloodskreaper.clans.Clan;
 import me.bloodskreaper.clans.Invite;
 import me.bloodskreaper.clans.Main;
-import net.md_5.bungee.api.ChatColor;
 
-public class ClanMainCommand implements CommandInterface{
-
+public class ClanInfo implements CommandInterface{
 
 	 
     @Override
@@ -30,7 +28,7 @@ public class ClanMainCommand implements CommandInterface{
         		p.sendMessage("§cKein Mitglied eines Clans");
         	}else {
         		Clan c = Main.getClanManager().getClanOfMember(p.getUniqueId());
-        		p.sendMessage(ChatColor.translateAlternateColorCodes('&', "§aClan: §8[§f"+c.getClanDisplayName()+"§8] §f"+c.getName()));
+        		p.sendMessage("§aClan: §6"+c.getClanDisplayName()+" "+c.getName());
         		String role = "";
         		if(c.getLeader().equals(p.getUniqueId())) role ="§6Admin";
         		if(!c.getLeader().equals(p.getUniqueId())) role ="§6Mitglied";        		
