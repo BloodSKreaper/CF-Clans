@@ -14,6 +14,8 @@ import me.bloodskreaper.clans.Commands.DeleteClan;
 import me.bloodskreaper.clans.Commands.RemoveMember;
 import me.bloodskreaper.clans.Commands.SetLeader;
 import me.bloodskreaper.clans.Commands.SetPrefix;
+import me.bloodskreaper.clans.Listeners.AsycPlayerChatEventListener;
+import me.bloodskreaper.clans.Listeners.PlayerJoinEventListener;
 
 public class Main extends JavaPlugin{
 	public static String prefix = "§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§b~§a+§c-§8[§6CF-Clans§8]§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~§c-§a+§b~";
@@ -31,6 +33,8 @@ public class Main extends JavaPlugin{
 		in = new InviteFile(this);
 		in.LoadInviteData();
 		
+		getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(this), this);
+		getServer().getPluginManager().registerEvents(new AsycPlayerChatEventListener(), this);
 		
 		this.registerCommands();
 	}

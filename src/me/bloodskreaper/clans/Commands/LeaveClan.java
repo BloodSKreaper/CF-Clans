@@ -21,7 +21,7 @@ public class LeaveClan implements CommandInterface{
         		Main.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
         	}else {
         		if(Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader().equals(p.getUniqueId())) {
-        			Main.sendMessageToPlayer(p, "§cDu kannst einen Clan nicht verlassen, solange du der Admin dieses bist! Ernenne jemanden Anderen als Admin mit §b/clan leader <NAME> §coder lösche den Clan mit §b/clan remove");
+        			Main.sendMessageToPlayer(p, "§cDu kannst einen Clan nicht verlassen, solange du der Admin dieses bist! Ernenne jemanden Anderen als Admin mit §b/clan leader <NAME> §coder lösche den Clan mit §b/clan delete");
         		}else {
         			Clan c = Main.getClanManager().getClanOfMember(p.getUniqueId());
         			c.removeMember(p.getUniqueId());

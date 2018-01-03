@@ -43,7 +43,7 @@ public class InviteMember  implements CommandInterface {
         					}else {       					
         						Main.getInviteManager().addInvite(new Invite(target.getUniqueId(), c));
         						Main.sendMessageToPlayer(p, "§aDu hast §6"+target.getName()+" §ain den Clan §6"+c.getName()+" §aeingeladen. §6"+target.getName()+" §ahat 10 Tage Zeit diese anzunehmen!");
-        						if(Bukkit.getPlayer(args[1]) != null)Main.sendMessageToPlayer(Bukkit.getPlayer(args[1]), "§aDu hast eine Einladung vom Clan §6"+c.getName()+" §aerhalten.");
+        						if(Bukkit.getPlayer(args[1]) != null)Main.sendMessageToPlayer(Bukkit.getPlayer(args[1]), "§aDu hast eine Einladung vom Clan §6"+c.getName()+" §aerhalten. Du kannst diese mit §b/clan acceptinvite "+c.getName()+" §aannehmen, oder mit §b/clan denyinvite "+c.getName()+" §aablehnen");
         					}
         				}
         			}

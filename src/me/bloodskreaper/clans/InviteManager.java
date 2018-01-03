@@ -51,6 +51,16 @@ public Invite getInvite(UUID player, String clanname) {
 	return null;
 }
 
+public List<Invite> getInvitesOfClan(Clan c){
+	List<Invite> claninvites = new ArrayList<Invite>();
+	for(Invite in:invites) {
+		if(in.getClan().equals(c)) {
+			claninvites.add(in);
+		}
+	}
+	return claninvites;
+}
+
 
 
 }

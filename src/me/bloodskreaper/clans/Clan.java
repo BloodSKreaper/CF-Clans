@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class Clan {
 	/*
@@ -74,6 +76,22 @@ public class Clan {
 		for(String userid: members) {
 			if(Bukkit.getPlayer(UUID.fromString(userid)) != null) {
 				Main.sendMessageToPlayer(Bukkit.getPlayer(UUID.fromString(userid)), message);
+			}
+		}
+	}
+	public void sendClanChat(Player sender, String message) {
+		for(String userid: members) {
+			if(Bukkit.getPlayer(UUID.fromString(userid)) != null) {
+				Player p = Bukkit.getPlayer(UUID.fromString(userid));
+				String formattedprefix = "§8[§6"+ChatColor.translateAlternateColorCodes('&', displayname)+"§8]";
+				String sendercoloured;
+				if(sender.getUniqueId().equals(leader)) {
+					sendercoloured = "§4"+sender.getName();
+				}else {
+					sendercoloured = "§2"+sender.getName();
+				}
+				String formattedmessage = ChatColor.translateAlternateColorCodes('&', message);
+				p.sendMessage(formattedprefix +" "+sendercoloured+" §7>> §f"+formattedmessage);
 			}
 		}
 	}

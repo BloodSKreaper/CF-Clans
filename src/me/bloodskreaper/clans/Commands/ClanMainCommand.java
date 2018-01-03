@@ -30,7 +30,7 @@ public class ClanMainCommand implements CommandInterface{
         		p.sendMessage("§cKein Mitglied eines Clans");
         	}else {
         		Clan c = Main.getClanManager().getClanOfMember(p.getUniqueId());
-        		p.sendMessage(ChatColor.translateAlternateColorCodes('&', "§aClan: §8[§f"+c.getClanDisplayName()+"§8] §f"+c.getName()));
+        		p.sendMessage(ChatColor.translateAlternateColorCodes('&', "§8[§f"+c.getClanDisplayName()+"§8] §f"+c.getName()));
         		String role = "";
         		if(c.getLeader().equals(p.getUniqueId())) role ="§6Admin";
         		if(!c.getLeader().equals(p.getUniqueId())) role ="§6Mitglied";        		
@@ -40,11 +40,18 @@ public class ClanMainCommand implements CommandInterface{
         	}
         	
         	
-        	p.sendMessage("§aEinladungen:");
+        	p.sendMessage("§aEinladungen an dich:");        	
         	if(Main.getInviteManager().isInvited(p.getUniqueId())) {
         		p.sendMessage(InviteListToCommaString(Main.getInviteManager().getInvitesOfPlayer(p.getUniqueId())));
         	}else {
         		p.sendMessage("§cKeine Einladungen vorhanden.");
+        	}if(Main.getClanManager().getClanOfMember(p.getUniqueId()) !=null&&Main.getClanManager().getClanOfMember(p.getUniqueId()).getLeader().equals(p.getUniqueId())) {
+        		Clan c = Main.getClanManager().getClanOfMember(p.getUniqueId());
+        		p.sendMessage("§aEinladungen deines Clans:");
+        		if(Main.getInviteManager().getInvitesOfClan(c).size()>0) {
+        			p.sendMessage(InviteListToCommaStringClan(Main.getInviteManager().getInvitesOfClan(c)));
+        		
+        		}
         	}
         	
         }
@@ -62,6 +69,22 @@ public class ClanMainCommand implements CommandInterface{
 
 			}else{
 				output = output+in.getClan().getName()+"§a, §6";
+
+			}
+			i = i-1;
+
+		}
+		return output;
+		}
+    public String InviteListToCommaStringClan(List<Invite> invites) {
+    	int i = invites.size();
+    	String output = "§6";
+		for(Invite in : invites){
+			if(i==1){
+				output = output+Bukkit.getOfflinePlayer(in.getPlayer()).getName();
+
+			}else{
+				output = output+Bukkit.getOfflinePlayer(in.getPlayer()).getName()+"§a, §6";
 
 			}
 			i = i-1;
