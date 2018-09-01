@@ -6,57 +6,60 @@ import java.util.UUID;
 
 public class ClanManager {
 	private List<Clan> clans = new ArrayList<Clan>();
-	
 
-	
-	public boolean addClan(Clan clan){
+	public boolean addClan(Clan clan) {
 		return clans.add(clan);
 	}
-	
-	public boolean removeClan(Clan clan){
+
+	public boolean removeClan(Clan clan) {
+		Main.getInviteManager().removeInvite(Main.getInviteManager().getInvitesOfClan(clan));
 		return clans.remove(clan);
 	}
-	public List<Clan> getClans(){
+
+	public List<Clan> getClans() {
 		return clans;
 	}
-	
+
 	public Clan getClanOfMember(UUID uuid) {
 		Clan result = null;
-		for(Clan c: clans) {
-			for(String id: c.getMembers()) {
-				if(id.equalsIgnoreCase(uuid.toString())) {
+		for (Clan c : clans) {
+			for (String id : c.getMembers()) {
+				if (id.equalsIgnoreCase(uuid.toString())) {
 					result = c;
 					break;
 				}
-				
+
 			}
 		}
 		return result;
 	}
-	
+
 	public Clan getClanFromName(String s) {
 		Clan result = null;
-		for(Clan c: clans) {
-			if(c.getName().equalsIgnoreCase(s)) result = c;
+		for (Clan c : clans) {
+			if (c.getName().equalsIgnoreCase(s))
+				result = c;
 		}
 		return result;
 	}
-	
+
 	public Clan getClanFromPrefix(String s) {
 		Clan result = null;
-		for(Clan c: clans) {
-			if(c.getClanDisplayName() != null &&c.getClanDisplayName().equalsIgnoreCase(s)) result = c;
+		for (Clan c : clans) {
+			if (c.getClanDisplayName() != null && c.getClanDisplayName().equalsIgnoreCase(s))
+				result = c;
 		}
 		return result;
 	}
-	
+
 	public Clan getClanFromUUID(UUID uuid) {
 		Clan result = null;
-		for(Clan c: clans) {
-			if(c.getClanUUID().equals(uuid)) result = c;
+		for (Clan c : clans) {
+			if (c.getClanUUID().equals(uuid))
+				result = c;
 		}
 		return result;
-		
+
 	}
 
 }

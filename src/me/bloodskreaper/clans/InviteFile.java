@@ -54,7 +54,7 @@ public class InviteFile {
 		}
 		saveConfigFile(async);
 	}
-	public void saveConfigFile(boolean async) {
+	private void saveConfigFile(boolean async) {
 		if(async == true) {
 			Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
 				@Override
