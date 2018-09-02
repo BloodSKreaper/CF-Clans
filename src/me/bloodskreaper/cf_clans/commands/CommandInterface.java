@@ -1,4 +1,4 @@
-package me.bloodskreaper.clans.Commands;
+package me.bloodskreaper.cf_clans.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

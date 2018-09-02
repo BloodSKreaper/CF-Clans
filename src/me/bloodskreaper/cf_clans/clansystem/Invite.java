@@ -1,4 +1,4 @@
-package me.bloodskreaper.clans;
+package me.bloodskreaper.cf_clans.clansystem;
 
 import java.util.UUID;
 
@@ -14,6 +14,7 @@ public class Invite {
 		this.clan = clan;
 		created = System.currentTimeMillis();
 	}
+	
 	public Invite(UUID inviteUUID, long created, UUID player, Clan clan) {
 		this.inviteUUID = inviteUUID;
 		this.invitedPlayer = player;

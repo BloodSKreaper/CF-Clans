@@ -1,4 +1,4 @@
-package me.bloodskreaper.clans;
+package me.bloodskreaper.cf_clans.clansystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class InviteManager {
 		return invites;
 	}
 
-	public boolean isInvited(UUID uuid) {
+	public boolean playerIsInvited(UUID uuid) {
 		boolean result = false;
 		for (Invite c : invites) {
 			if (c.getPlayer().equals(uuid))
@@ -31,7 +31,7 @@ public class InviteManager {
 		return result;
 	}
 
-	public boolean PlayerhasInviteFromClan(UUID uuid, String clanname) {
+	public boolean playerHasInviteFromClan(UUID uuid, String clanname) {
 		boolean result = false;
 		for (Invite inv : invites) {
 			if (inv.getPlayer().equals(uuid) && inv.getClan().getName().equalsIgnoreCase(clanname))
@@ -49,7 +49,7 @@ public class InviteManager {
 		return playerinvites;
 	}
 
-	public Invite getInvite(UUID player, String clanname) {
+	public Invite getInviteOfPlayerAndClan(UUID player, String clanname) {
 		for (Invite inv : invites) {
 			if (inv.getPlayer().equals(player) && inv.getClan().getName().equalsIgnoreCase(clanname))
 				return inv;

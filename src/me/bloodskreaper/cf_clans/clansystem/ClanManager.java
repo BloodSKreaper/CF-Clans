@@ -1,8 +1,10 @@
-package me.bloodskreaper.clans;
+package me.bloodskreaper.cf_clans.clansystem;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import me.bloodskreaper.cf_clans.CF_Clans;
 
 public class ClanManager {
 	private List<Clan> clans = new ArrayList<Clan>();
@@ -12,7 +14,7 @@ public class ClanManager {
 	}
 
 	public boolean removeClan(Clan clan) {
-		Main.getInviteManager().removeInvite(Main.getInviteManager().getInvitesOfClan(clan));
+		CF_Clans.getInviteManager().removeInvite(CF_Clans.getInviteManager().getInvitesOfClan(clan));
 		return clans.remove(clan);
 	}
 

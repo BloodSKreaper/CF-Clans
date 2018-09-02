@@ -1,4 +1,4 @@
-package me.bloodskreaper.clans;
+package me.bloodskreaper.cf_clans.data;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,12 +10,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-public class ClanFile {
+import me.bloodskreaper.cf_clans.CF_Clans;
+import me.bloodskreaper.cf_clans.clansystem.Clan;
+
+public class ClanFileHandler {
 	private File datafile;
 	private YamlConfiguration data;
 	private Plugin pl;
 	
-	public ClanFile(Plugin plugin) {
+	public ClanFileHandler(Plugin plugin) {
 		pl = plugin;
 		datafile = new File(pl.getDataFolder(), "ClanData.yml");
 		if(!datafile.exists() == true && datafile.isDirectory()) {
@@ -33,13 +36,13 @@ public class ClanFile {
 		if(clandata.size()!=0) {
 			for(String uuid: clandata) {
 				Clan created = new Clan(UUID.fromString(uuid), data.getString(uuid+".name"), data.getString(uuid+".displayname"), UUID.fromString(data.getString(uuid+".leader")), data.getStringList(uuid+".members"));
-				Main.getClanManager().addClan(created);
+				CF_Clans.getClanManager().addClan(created);
 			}
 		}
 	}
 	
 	public void SaveToYamlConfig(boolean async) {
-		List<Clan> clans = Main.getClanManager().getClans();
+		List<Clan> clans = CF_Clans.getClanManager().getClans();
 		for(String s:data.getKeys(false)) {
 			data.set(s, null);
 		}
