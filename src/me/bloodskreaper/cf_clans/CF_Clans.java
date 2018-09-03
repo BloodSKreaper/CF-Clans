@@ -34,11 +34,11 @@ public class CF_Clans extends JavaPlugin {
 	public void onEnable() {
 		cm = new ClanManager();
 		cl = new ClanFileHandler(this);
-		cl.LoadClanData();
+		cl.loadClanData();
 
 		im = new InviteManager();
 		in = new InviteFileHandler(this);
-		in.LoadInviteData();
+		in.loadInviteData();
 
 		getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(this), this);
 		getServer().getPluginManager().registerEvents(new AsycPlayerChatEventListener(), this);
@@ -48,8 +48,8 @@ public class CF_Clans extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		cl.SaveToYamlConfig(false);
-		in.SaveToYamlConfig(false);
+		cl.saveToYamlConfig(false);
+		in.saveToYamlConfig(false);
 
 	}
 
@@ -93,8 +93,8 @@ public class CF_Clans extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
 				im.checkForExpiredInvites();
-				in.SaveToYamlConfig(true);
-				cl.SaveToYamlConfig(true);
+				in.saveToYamlConfig(true);
+				cl.saveToYamlConfig(true);
 			}
 		}, 0L, 20 * 10L);
 	}

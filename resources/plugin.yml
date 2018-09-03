@@ -10,7 +10,7 @@ main: me.bloodskreaper.cf_clans.CF_Clans
 commands:
   clan:
     usage: /<command> [arg]
-    permisison: cf_clans.use
+    permisson: cf_clans.use
     description: Basisbefehl des Plugins
 
 #Alle Befehle:

@@ -88,18 +88,14 @@ public class Clan {
 	}
 
 	public void sendClanChat(Player sender, String message) {
+		String formattedmessage = ChatColor.translateAlternateColorCodes('&', message);
+		String formattedprefix = "§8[§6" + ChatColor.translateAlternateColorCodes('&', displayname) + "§8]";
+		String sendercoloured = sender.getUniqueId().equals(leader) ? "§4" + sender.getName() : "§2" + sender.getName();
+		Player target;
 		for (UUID userid : members) {
-			if (Bukkit.getPlayer(userid) != null) {
-				Player p = Bukkit.getPlayer(userid);
-				String formattedprefix = "§8[§6" + ChatColor.translateAlternateColorCodes('&', displayname) + "§8]";
-				String sendercoloured;
-				if (sender.getUniqueId().equals(leader)) {
-					sendercoloured = "§4" + sender.getName();
-				} else {
-					sendercoloured = "§2" + sender.getName();
-				}
-				String formattedmessage = ChatColor.translateAlternateColorCodes('&', message);
-				p.sendMessage(formattedprefix + " " + sendercoloured + " §7>> §f" + formattedmessage);
+			target = Bukkit.getPlayer(userid);
+			if (target != null) {
+				target.sendMessage(formattedprefix + " " + sendercoloured + " §7>> §f" + formattedmessage);
 			}
 		}
 	}

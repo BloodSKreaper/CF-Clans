@@ -27,14 +27,14 @@ public class ClanMainCommand implements CommandInterface {
 		}
 		p.sendMessage("§aEinladungen an dich:");
 		if (CF_Clans.getInviteManager().playerIsInvited(p.getUniqueId())) {
-			p.sendMessage(InviteListToCommaString(CF_Clans.getInviteManager().getInvitesOfPlayer(p.getUniqueId())));
+			p.sendMessage(convertinviteListToCommaString(CF_Clans.getInviteManager().getInvitesOfPlayer(p.getUniqueId())));
 		} else {
 			p.sendMessage("§cKeine Einladungen vorhanden.");
 		}
 		return false;
 	}
 
-	private String InviteListToCommaString(List<Invite> invites) {
+	private String convertinviteListToCommaString(List<Invite> invites) {
 		int i = invites.size();
 		String output = "§6";
 		for (Invite in : invites) {
@@ -68,7 +68,7 @@ public class ClanMainCommand implements CommandInterface {
 		return output;
 	}
 
-	private String UUIDListToCommaString(List<UUID> members) {
+	private String convertUUIDListToCommaString(List<UUID> members) {
 		int i = members.size();
 		String output = "§6";
 		for (UUID in : members) {
@@ -89,7 +89,7 @@ public class ClanMainCommand implements CommandInterface {
 		String name = clan.getName();
 		String displayname = clan.getClanDisplayName();
 		String admin = Bukkit.getOfflinePlayer(clan.getLeader()).getName();
-		String members = UUIDListToCommaString(clan.getMembers());
+		String members = convertUUIDListToCommaString(clan.getMembers());
 		String invitedOnes = inviteListToCommaStringClan(CF_Clans.getInviteManager().getInvitesOfClan(clan));
 
 		p.sendMessage("§aName: §8[§b" + displayname + "§8]" + " " + "§6" + name);

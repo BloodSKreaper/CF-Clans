@@ -31,7 +31,7 @@ public class InviteFileHandler {
 		data = YamlConfiguration.loadConfiguration(datafile);
 	}
 
-	public void LoadInviteData() {
+	public void loadInviteData() {
 		Set<String> inviteuuids = data.getKeys(false);
 		if (inviteuuids.size() != 0) {
 			for (String uuid : inviteuuids) {
@@ -47,7 +47,7 @@ public class InviteFileHandler {
 		}
 	}
 
-	public void SaveToYamlConfig(boolean async) {
+	public void saveToYamlConfig(boolean async) {
 		List<Invite> invites = CF_Clans.getInviteManager().getInvites();
 		for (String s : data.getKeys(false)) {
 			data.set(s, null);

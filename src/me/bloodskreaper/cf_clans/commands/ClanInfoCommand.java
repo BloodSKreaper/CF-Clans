@@ -66,7 +66,7 @@ public class ClanInfoCommand implements CommandInterface {
 		String name = clan.getName();
 		String displayname = clan.getClanDisplayName();
 		String admin = Bukkit.getOfflinePlayer(clan.getLeader()).getName();
-		String members = UUIDListToCommaString(clan.getMembers());
+		String members = convertUUIDListToCommaString(clan.getMembers());
 		String invitedOnes = inviteListToCommaString(CF_Clans.getInviteManager().getInvitesOfClan(clan));
 
 		p.sendMessage("§aName: §8[§b" + displayname + "§8]" + " " + "§6" + name);
@@ -75,7 +75,7 @@ public class ClanInfoCommand implements CommandInterface {
 		p.sendMessage("§aEingeladene: " + invitedOnes);
 	}
 
-	public String UUIDListToCommaString(List<UUID> members) {
+	public String convertUUIDListToCommaString(List<UUID> members) {
 		int i = members.size();
 		String output = "§6";
 		for (UUID in : members) {

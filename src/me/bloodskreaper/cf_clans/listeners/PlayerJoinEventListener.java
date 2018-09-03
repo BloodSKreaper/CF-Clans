@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import me.bloodskreaper.cf_clans.CF_Clans;
 
 public class PlayerJoinEventListener implements Listener {
+	
 	Plugin pl;
 
 	public PlayerJoinEventListener(Plugin plugin) {

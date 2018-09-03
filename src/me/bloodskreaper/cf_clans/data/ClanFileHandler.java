@@ -32,7 +32,7 @@ public class ClanFileHandler {
 		data = YamlConfiguration.loadConfiguration(datafile);
 	}
 
-	public void LoadClanData() {
+	public void loadClanData() {
 		Set<String> clandata = data.getKeys(false);
 		if (clandata.size() != 0) {
 			for (String uuid : clandata) {
@@ -48,7 +48,7 @@ public class ClanFileHandler {
 		}
 	}
 
-	public void SaveToYamlConfig(boolean async) {
+	public void saveToYamlConfig(boolean async) {
 		List<Clan> clans = CF_Clans.getClanManager().getClans();
 		for (String s : data.getKeys(false)) {
 			data.set(s, null);

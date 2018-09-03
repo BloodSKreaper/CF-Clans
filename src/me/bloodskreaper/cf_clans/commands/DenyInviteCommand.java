@@ -23,7 +23,7 @@ public class DenyInviteCommand implements CommandInterface {
 			}
 			List<Invite> invites = CF_Clans.getInviteManager().getInvitesOfPlayer(p.getUniqueId());
 			CF_Clans.sendMessageToPlayer(p,
-					"§aVon folgenden Clans steht eine Einladung aus: " + ListToCommaString(invites));
+					"§aVon folgenden Clans steht eine Einladung aus: " + convertInviteListToCommaString(invites));
 
 			return false;
 		}
@@ -53,7 +53,7 @@ public class DenyInviteCommand implements CommandInterface {
 		return false;
 	}
 
-	private String ListToCommaString(List<Invite> invites) {
+	private String convertInviteListToCommaString(List<Invite> invites) {
 		int i = invites.size();
 		String output = "§6";
 		for (Invite in : invites) {
