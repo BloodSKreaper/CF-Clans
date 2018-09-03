@@ -18,41 +18,34 @@ public class SetLeaderCommand implements CommandInterface {
 		Player p = (Player) sender;
 		if (args.length == 1) {
 			CF_Clans.sendMessageToPlayer(p, "§cDu musst einen Namen angeben. Bsp: §b/clan leader BloodSKreaper");
-		} else {
-			if (args.length > 2) {
-				CF_Clans.sendMessageToPlayer(p, "§cFalsches Format! Format: §b/clan leader <PLAYERNAME>");
-			} else {
-				if (CF_Clans.getClanManager().getClanOfMember(p.getUniqueId()) == null) {
-					CF_Clans.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
-				} else {
-					Clan clan = CF_Clans.getClanManager().getClanOfMember(p.getUniqueId());
-					if (!clan.getLeader().equals(p.getUniqueId())) {
-						CF_Clans.sendMessageToPlayer(p, "§cDu bist nicht der Admin deines Clans!");
-					} else {
-						if (Bukkit.getOfflinePlayer(args[1]) == null) {
-							CF_Clans.sendMessageToPlayer(p, "§cDer Spieler §6" + args[1] + " §cexistiert nícht!");
-						} else {
-							OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
-							if (CF_Clans.getClanManager().getClanOfMember(target.getUniqueId()) == null) {
-								CF_Clans.sendMessageToPlayer(p, "§cDer Spieler ist kein Mitglied eines Clans!");
-							} else {
-								if (!CF_Clans.getClanManager().getClanOfMember(target.getUniqueId()).equals(clan)) {
-									CF_Clans.sendMessageToPlayer(p, "§cDer Spieler ist nicht in deinem Clan!");
-								} else {
-									// SET LEADER
-									clan.setLeader(target.getUniqueId());
-									CF_Clans.sendMessageToPlayer(p, "§aDu hast §6" + target.getName()
-											+ " §azum Admin des Clans §6" + clan.getName() + " §aernannt!");
-									if (Bukkit.getPlayer(args[1]) != null)
-										CF_Clans.sendMessageToPlayer(Bukkit.getPlayer(args[1]),
-												"§aDu wurdest zum Admin vom Clan §6" + clan.getName() + " §aernannt!");
-								}
-							}
-						}
-					}
-				}
-			}
+			return false;
 		}
+		if (args.length > 2) {
+			CF_Clans.sendMessageToPlayer(p, "§cFalsches Format! Format: §b/clan leader <PLAYERNAME>");
+			return false;
+		}
+		Clan clan = CF_Clans.getClanManager().getClanOfMember(p.getUniqueId());
+		if (clan == null) {
+			CF_Clans.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
+			return false;
+		}
+		if (!clan.getLeader().equals(p.getUniqueId())) {
+			CF_Clans.sendMessageToPlayer(p, "§cDu bist nicht der Admin deines Clans!");
+			return false;
+		}
+		OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+		if (!clan.getMembers().contains(target.getUniqueId())) {
+			CF_Clans.sendMessageToPlayer(p, "§cDer Spieler ist nicht in deinem Clan!");
+			return false;
+		}
+		// All should be fine here
+		clan.setLeader(target.getUniqueId());
+		CF_Clans.sendMessageToPlayer(p,
+				"§aDu hast §6" + target.getName() + " §azum Admin des Clans §6" + clan.getName() + " §aernannt!");
+		if (Bukkit.getPlayer(args[1]) != null)
+			CF_Clans.sendMessageToPlayer(Bukkit.getPlayer(args[1]),
+					"§aDu wurdest zum Admin vom Clan §6" + clan.getName() + " §aernannt!");
+
 		return false;
 
 	}

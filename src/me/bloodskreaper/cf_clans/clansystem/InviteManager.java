@@ -31,10 +31,10 @@ public class InviteManager {
 		return result;
 	}
 
-	public boolean playerHasInviteFromClan(UUID uuid, String clanname) {
+	public boolean playerHasInviteFromClan(UUID uuid, Clan clan) {
 		boolean result = false;
 		for (Invite inv : invites) {
-			if (inv.getPlayer().equals(uuid) && inv.getClan().getName().equalsIgnoreCase(clanname))
+			if (inv.getPlayer().equals(uuid) && inv.getClan() == clan)
 				result = true;
 		}
 		return result;
@@ -49,9 +49,9 @@ public class InviteManager {
 		return playerinvites;
 	}
 
-	public Invite getInviteOfPlayerAndClan(UUID player, String clanname) {
+	public Invite getInviteOfPlayerAndClan(UUID player, Clan clan) {
 		for (Invite inv : invites) {
-			if (inv.getPlayer().equals(player) && inv.getClan().getName().equalsIgnoreCase(clanname))
+			if (inv.getPlayer().equals(player) && inv.getClan() == clan)
 				return inv;
 		}
 		return null;

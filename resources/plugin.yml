@@ -1,9 +1,28 @@
 name: CF-Clans
 version: 1.0
-author: ChrisOchs
-
+author: Christian Ochs
+description: Ein kleines Clan Plugin für Spigot-Server
+load: STARTUP
+website: Keine Website vorhanden
+prefix: CF-Clans
 main: me.bloodskreaper.cf_clans.CF_Clans
 
 commands:
   clan:
-    usage: /<command>
+    usage: /<command> [arg]
+    permisison: cf_clans.use
+    description: Basisbefehl des Plugins
+
+#Alle Befehle:
+#	- /clan create <Name> - Erstellt einen Clan mit dem Namen <Name> und setzt den ausführenden Player als Clan-Admin 
+#	- /clan prefix <Prefix> - Setzt den Prefix des Clans des ausführenden Players, solange dieser in einen Clan ist und Clan-Admin ist.
+#	- /clan invite <Spielername> - Lädt einen Spieler in den Clan des ausführenden Spielers ein.
+#	- /clan denytinvite <Clanname> - Lehnt die Clan-Einladung eines Clans an den ausführenden Spieler ab.
+#	- /clan acceptinvite <Clanname> - Nimmt die Clan-Einladung eines Clans an den ausführenden Spieler an, solange dieser in keinem Clan ist.
+#	- /clan leave - Entfernt den ausführenden Spieler aus seinem Clan, sofern dieser kein Clan-Admin ist.
+#	- /clan leader <Spielername> - Setzt einen Spieler als Admin des Clans, solange der ausführende Spieler Admin seines Clans ist und <Spielername> im selben Clan ist.
+#	- /clan remove <Spielername> - Schmeißt einen Spieler aus dem Clan, solange der ausführende Spieler Admin des Clans ist.
+#	- /clan delete - Entfernt den Clan des ausführenden Spielers, solange dieser Clan-Admin ist.
+#	- /clan - Zeigt Clan-Informationen des ausführenden Spielers an.
+#	- /clan help - Zeigt dem ausführenden Spieler alle möglichen Clan-Subcommands an.
+#	- /clan info <Variable> - <Variable> kann ein Clan-Prefix oder Clan-Name sein; Gibt Informationen zu dem gesuchten Clan aus. Sucht erst nach dem Prefix eines Clans.

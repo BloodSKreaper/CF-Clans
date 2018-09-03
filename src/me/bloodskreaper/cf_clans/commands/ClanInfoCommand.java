@@ -13,73 +13,81 @@ import me.bloodskreaper.cf_clans.clansystem.Clan;
 import me.bloodskreaper.cf_clans.clansystem.Invite;
 
 public class ClanInfoCommand implements CommandInterface {
+	public ClanInfoCommand() {
+	}
 
-	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		Player p = (Player) sender;
-		if (args.length > 1) {
-			CF_Clans.sendMessageToPlayer(p, "§cFalsches Format! §b/clan info");
-		} else {
+		Clan clan;
+		if (args.length == 1) {
 			CF_Clans.sendMessageToPlayer(p, "§3Deine Clan Informationen:");
-			p.sendMessage("§aDein Clan:");
 			if (CF_Clans.getClanManager().getClanOfMember(p.getUniqueId()) == null) {
 				p.sendMessage("§cKein Mitglied eines Clans");
 			} else {
-				Clan c = CF_Clans.getClanManager().getClanOfMember(p.getUniqueId());
-				p.sendMessage("§aClan: §6" + c.getClanDisplayName() + " " + c.getName());
-				String role = "";
-				if (c.getLeader().equals(p.getUniqueId()))
-					role = "§6Admin";
-				if (!c.getLeader().equals(p.getUniqueId()))
-					role = "§6Mitglied";
-				p.sendMessage("§aDeine Rolle: " + role);
-				p.sendMessage("§aAlle Mitglieder:");
-				p.sendMessage(UUIDListToCommaString(c.getMembers()));
+				clan = CF_Clans.getClanManager().getClanOfMember(p.getUniqueId());
+				printClanDetailsToPlayer(p, clan);
+			}
+			return false;
+		}
+		if (args.length == 2) {
+			clan = CF_Clans.getClanManager().getClanFromPrefix(args[1]);
+			if (clan == null) {
+				clan = CF_Clans.getClanManager().getClanFromName(args[1]);
 			}
 
-			p.sendMessage("§aEinladungen:");
-			if (CF_Clans.getInviteManager().playerIsInvited(p.getUniqueId())) {
-				p.sendMessage(InviteListToCommaString(CF_Clans.getInviteManager().getInvitesOfPlayer(p.getUniqueId())));
+			if (clan == null) {
+				CF_Clans.sendMessageToPlayer(p,
+						"§cEs wurde kein passender Clan zur Eingabe §6" + args[1] + " §cgefunden.");
 			} else {
-				p.sendMessage("§cKeine Einladungen vorhanden.");
+				CF_Clans.sendMessageToPlayer(p, "§3Clan Infos zum Clan " + clan.getName() + ":");
+				printClanDetailsToPlayer(p, clan);
 			}
-
+			return false;
 		}
 
 		return false;
 	}
 
-	private String InviteListToCommaString(List<Invite> invites) {
+	private String inviteListToCommaString(List<Invite> invites) {
 		int i = invites.size();
 		String output = "§6";
 		for (Invite in : invites) {
 			if (i == 1) {
-				output = output + in.getClan().getName();
-
+				output = output + Bukkit.getOfflinePlayer(in.getPlayer()).getName();
 			} else {
-				output = output + in.getClan().getName() + "§a, §6";
-
+				output = output + Bukkit.getOfflinePlayer(in.getPlayer()).getName() + "§a, §6";
 			}
-			i = i - 1;
-
+			i--;
 		}
 		return output;
 	}
 
-	private String UUIDListToCommaString(List<String> members) {
+	private void printClanDetailsToPlayer(Player p, Clan clan) {
+		String name = clan.getName();
+		String displayname = clan.getClanDisplayName();
+		String admin = Bukkit.getOfflinePlayer(clan.getLeader()).getName();
+		String members = UUIDListToCommaString(clan.getMembers());
+		String invitedOnes = inviteListToCommaString(CF_Clans.getInviteManager().getInvitesOfClan(clan));
+
+		p.sendMessage("§aName: §8[§b" + displayname + "§8]" + " " + "§6" + name);
+		p.sendMessage("§aAdmin: §6" + admin);
+		p.sendMessage("§aMitglieder: " + members);
+		p.sendMessage("§aEingeladene: " + invitedOnes);
+	}
+
+	public String UUIDListToCommaString(List<UUID> members) {
 		int i = members.size();
 		String output = "§6";
-		for (String in : members) {
+		for (UUID in : members) {
 			if (i == 1) {
-				output = output + Bukkit.getOfflinePlayer(UUID.fromString(in)).getName();
-
+				output = output + Bukkit.getOfflinePlayer(in).getName();
 			} else {
-				output = output + Bukkit.getOfflinePlayer(UUID.fromString(in)).getName() + "§a, §6";
-
+				output = output + Bukkit.getOfflinePlayer(in).getName() + "§a, §6";
 			}
-			i = i - 1;
 
+			i--;
 		}
+
 		return output;
 	}
 }

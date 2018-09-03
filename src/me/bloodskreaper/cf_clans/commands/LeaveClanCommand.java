@@ -14,20 +14,21 @@ public class LeaveClanCommand implements CommandInterface {
 		Player p = (Player) sender;
 		if (args.length != 1) {
 			CF_Clans.sendMessageToPlayer(p, "§cFalsches Format! §b/clan leave");
-		} else {
-			if (CF_Clans.getClanManager().getClanOfMember(p.getUniqueId()) == null) {
-				CF_Clans.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
-			} else {
-				if (CF_Clans.getClanManager().getClanOfMember(p.getUniqueId()).getLeader().equals(p.getUniqueId())) {
-					CF_Clans.sendMessageToPlayer(p,
-							"§cDu kannst einen Clan nicht verlassen, solange du der Admin dieses bist! Ernenne jemanden Anderen als Admin mit §b/clan leader <NAME> §coder lösche den Clan mit §b/clan delete");
-				} else {
-					Clan c = CF_Clans.getClanManager().getClanOfMember(p.getUniqueId());
-					c.removeMember(p.getUniqueId());
-					CF_Clans.sendMessageToPlayer(p, "§aDu hast den Clan §6" + c.getName() + " §averlassen!");
-				}
-			}
+			return false;
 		}
+		Clan clan = CF_Clans.getClanManager().getClanOfMember(p.getUniqueId());
+		if (clan == null) {
+			CF_Clans.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
+			return false;
+		}
+		if (clan.getLeader() == p.getUniqueId()) {
+			CF_Clans.sendMessageToPlayer(p,
+					"§cDu kannst einen Clan nicht verlassen, solange du der Admin dieses bist! Ernenne jemanden Anderen als Admin mit §b/clan leader <NAME> §coder lösche den Clan mit §b/clan delete");
+			return false;
+		}
+		clan.removeMember(p.getUniqueId());
+		CF_Clans.sendMessageToPlayer(p, "§aDu hast den Clan §6" + clan.getName() + " §averlassen!");
+
 		return false;
 	}
 }

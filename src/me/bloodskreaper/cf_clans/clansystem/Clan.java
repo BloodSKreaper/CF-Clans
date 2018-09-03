@@ -1,6 +1,5 @@
 package me.bloodskreaper.cf_clans.clansystem;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,16 +18,16 @@ public class Clan {
 	private UUID clanUUID;
 	private String displayname;
 	private UUID leader;
-	private List<String> members = new ArrayList<String>();
+	private List<UUID> members;
 
 	public Clan(String name, UUID leader) {
 		clanUUID = UUID.randomUUID();
 		this.name = name;
 		this.leader = leader;
-		members.add(leader.toString());
+		members.add(leader);
 	}
 
-	public Clan(UUID clanUUID, String name, String displayname, UUID leader, List<String> members) {
+	public Clan(UUID clanUUID, String name, String displayname, UUID leader, List<UUID> members) {
 		this.name = name;
 		this.displayname = displayname;
 		this.members = members;
@@ -48,7 +47,7 @@ public class Clan {
 		this.leader = leader;
 	}
 
-	public void setMembers(List<String> members) {
+	public void setMembers(List<UUID> members) {
 		this.members = members;
 	}
 
@@ -61,37 +60,37 @@ public class Clan {
 	}
 
 	public String getClanDisplayName() {
-		return displayname;
+		return ChatColor.translateAlternateColorCodes('&', displayname);
 	}
 
 	public UUID getLeader() {
 		return leader;
 	}
 
-	public List<String> getMembers() {
+	public List<UUID> getMembers() {
 		return members;
 	}
 
 	public void addMember(UUID member) {
-		members.add(member.toString());
+		members.add(member);
 	}
 
 	public void removeMember(UUID member) {
-		members.remove(member.toString());
+		members.remove(member);
 	}
 
 	public void sendMessageToAllMembers(String message) {
-		for (String userid : members) {
-			if (Bukkit.getPlayer(UUID.fromString(userid)) != null) {
-				CF_Clans.sendMessageToPlayer(Bukkit.getPlayer(UUID.fromString(userid)), message);
+		for (UUID userid : members) {
+			if (Bukkit.getPlayer(userid) != null) {
+				CF_Clans.sendMessageToPlayer(Bukkit.getPlayer(userid), message);
 			}
 		}
 	}
 
 	public void sendClanChat(Player sender, String message) {
-		for (String userid : members) {
-			if (Bukkit.getPlayer(UUID.fromString(userid)) != null) {
-				Player p = Bukkit.getPlayer(UUID.fromString(userid));
+		for (UUID userid : members) {
+			if (Bukkit.getPlayer(userid) != null) {
+				Player p = Bukkit.getPlayer(userid);
 				String formattedprefix = "§8[§6" + ChatColor.translateAlternateColorCodes('&', displayname) + "§8]";
 				String sendercoloured;
 				if (sender.getUniqueId().equals(leader)) {
