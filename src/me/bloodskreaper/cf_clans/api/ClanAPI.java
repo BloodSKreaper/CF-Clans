@@ -12,8 +12,9 @@ public class ClanAPI {
 	}
 
 	public static String getClanPrefix(UUID uuid) {
-		if (getClanOfUser(uuid) != null) {
-			return getClanOfUser(uuid).getClanDisplayName();
+		Clan clan = getClanOfUser(uuid);
+		if (clan != null) {
+			return clan.getClanDisplayName();
 		}
 		return null;
 	}
