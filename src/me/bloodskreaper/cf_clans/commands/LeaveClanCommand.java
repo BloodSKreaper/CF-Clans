@@ -21,7 +21,7 @@ public class LeaveClanCommand implements CommandInterface {
 			CF_Clans.sendMessageToPlayer(p, "§cDu bist kein Mitglied eines Clans!");
 			return false;
 		}
-		if (clan.getLeader() == p.getUniqueId()) {
+		if (clan.getLeader().equals(p.getUniqueId())) {
 			CF_Clans.sendMessageToPlayer(p,
 					"§cDu kannst einen Clan nicht verlassen, solange du der Admin dieses bist! Ernenne jemanden Anderen als Admin mit §b/clan leader <NAME> §coder lösche den Clan mit §b/clan delete");
 			return false;

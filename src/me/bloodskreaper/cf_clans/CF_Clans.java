@@ -7,6 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.bloodskreaper.cf_clans.clansystem.ClanManager;
 import me.bloodskreaper.cf_clans.clansystem.InviteManager;
 import me.bloodskreaper.cf_clans.commands.AcceptInviteCommand;
+import me.bloodskreaper.cf_clans.commands.ClanDebugCommand;
+import me.bloodskreaper.cf_clans.commands.ClanInfoCommand;
 import me.bloodskreaper.cf_clans.commands.ClanMainCommand;
 import me.bloodskreaper.cf_clans.commands.CommandHandler;
 import me.bloodskreaper.cf_clans.commands.CreateClanCommand;
@@ -16,8 +18,8 @@ import me.bloodskreaper.cf_clans.commands.HelpCommand;
 import me.bloodskreaper.cf_clans.commands.InviteMemberCommand;
 import me.bloodskreaper.cf_clans.commands.LeaveClanCommand;
 import me.bloodskreaper.cf_clans.commands.RemoveMemberCommand;
-import me.bloodskreaper.cf_clans.commands.SetLeaderCommand;
 import me.bloodskreaper.cf_clans.commands.SetClanPrefixCommand;
+import me.bloodskreaper.cf_clans.commands.SetLeaderCommand;
 import me.bloodskreaper.cf_clans.data.ClanFileHandler;
 import me.bloodskreaper.cf_clans.data.InviteFileHandler;
 import me.bloodskreaper.cf_clans.listeners.AsycPlayerChatEventListener;
@@ -36,6 +38,7 @@ public class CF_Clans extends JavaPlugin {
 		cl = new ClanFileHandler(this);
 		cl.loadClanData();
 
+		//The Clan Data needs to be loaded first
 		im = new InviteManager();
 		in = new InviteFileHandler(this);
 		in.loadInviteData();
@@ -79,6 +82,8 @@ public class CF_Clans extends JavaPlugin {
 		handler.register("acceptinvite", new AcceptInviteCommand());
 		handler.register("denyinvite", new DenyInviteCommand());
 		handler.register("help", new HelpCommand());
+		handler.register("info", new ClanInfoCommand());
+		handler.register("debug", new ClanDebugCommand());
 
 		getCommand("clan").setExecutor(handler);
 	}
@@ -96,7 +101,7 @@ public class CF_Clans extends JavaPlugin {
 				in.saveToYamlConfig(true);
 				cl.saveToYamlConfig(true);
 			}
-		}, 0L, 20 * 10L);
+		}, 0L, 20 * 300L);
 	}
 
 }

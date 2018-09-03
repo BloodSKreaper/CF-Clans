@@ -1,5 +1,6 @@
 package me.bloodskreaper.cf_clans.clansystem;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class Clan {
 	private UUID clanUUID;
 	private String displayname;
 	private UUID leader;
-	private List<UUID> members;
+	private List<UUID> members = new ArrayList<UUID>();
 
 	public Clan(String name, UUID leader) {
 		clanUUID = UUID.randomUUID();
@@ -60,7 +61,9 @@ public class Clan {
 	}
 
 	public String getClanDisplayName() {
-		return ChatColor.translateAlternateColorCodes('&', displayname);
+		if (displayname != null)
+			return ChatColor.translateAlternateColorCodes('&', displayname);
+		return null;
 	}
 
 	public UUID getLeader() {
@@ -77,6 +80,12 @@ public class Clan {
 
 	public void removeMember(UUID member) {
 		members.remove(member);
+	}
+
+	public boolean playerIsMember(UUID uuid) {
+		if (members.contains(uuid))
+			return true;
+		return false;
 	}
 
 	public void sendMessageToAllMembers(String message) {

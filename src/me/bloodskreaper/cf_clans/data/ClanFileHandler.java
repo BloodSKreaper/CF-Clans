@@ -58,7 +58,11 @@ public class ClanFileHandler {
 			data.set(path + "name", c.getName());
 			data.set(path + "displayname", c.getClanDisplayName());
 			data.set(path + "leader", c.getLeader().toString());
-			data.set(path + "members", c.getMembers());
+			List<String> members = new ArrayList<String>();
+			for(UUID uuid: c.getMembers()) {
+				members.add(uuid.toString());
+			}
+			data.set(path + "members", members);
 		}
 		saveConfigFile(async);
 	}
