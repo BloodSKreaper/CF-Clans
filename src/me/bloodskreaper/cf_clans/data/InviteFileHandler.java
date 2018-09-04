@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -35,12 +36,11 @@ public class InviteFileHandler {
 		Set<String> inviteuuids = data.getKeys(false);
 		if (inviteuuids.size() != 0) {
 			for (String uuid : inviteuuids) {
-				if (CF_Clans.getClanManager()
-						.getClanFromUUID(UUID.fromString(data.getString(uuid + ".clan"))) != null) {
-
-					Invite created = new Invite(UUID.fromString(uuid), data.getLong(uuid + ".created"),
-							UUID.fromString(data.getString(uuid + ".player")),
-							CF_Clans.getClanManager().getClanFromUUID(UUID.fromString(data.getString(uuid + ".clan"))));
+				ConfigurationSection section = data.getConfigurationSection(uuid);
+				if (CF_Clans.getClanManager().getClanFromUUID(UUID.fromString(section.getString("clan"))) != null) {
+					Invite created = new Invite(UUID.fromString(uuid), section.getLong("created"),
+							UUID.fromString(section.getString("player")),
+							CF_Clans.getClanManager().getClanFromUUID(UUID.fromString(section.getString(".clan"))));
 					CF_Clans.getInviteManager().addInvite(created);
 				}
 			}

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InviteManager {
-	private List<Invite> invites = new ArrayList<Invite>();
+	private List<Invite> invites = new ArrayList<>();
 
 	public InviteManager() {
 	}
@@ -41,7 +41,7 @@ public class InviteManager {
 	}
 
 	public List<Invite> getInvitesOfPlayer(UUID uuid) {
-		List<Invite> playerinvites = new ArrayList<Invite>();
+		List<Invite> playerinvites = new ArrayList<>();
 		for (Invite in : invites) {
 			if (in.getPlayer().equals(uuid))
 				playerinvites.add(in);
@@ -58,7 +58,7 @@ public class InviteManager {
 	}
 
 	public List<Invite> getInvitesOfClan(Clan c) {
-		List<Invite> claninvites = new ArrayList<Invite>();
+		List<Invite> claninvites = new ArrayList<>();
 		for (Invite in : invites) {
 			if (in.getClan().equals(c)) {
 				claninvites.add(in);
@@ -68,7 +68,7 @@ public class InviteManager {
 	}
 
 	public void checkForExpiredInvites() {
-		List<Invite> toRemove = new ArrayList<Invite>(invites.size());
+		List<Invite> toRemove = new ArrayList<>(invites.size());
 		for (Invite i : invites) {
 			if (i.isOutdated()) {
 				toRemove.add(i);

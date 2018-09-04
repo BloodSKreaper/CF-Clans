@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -36,13 +37,13 @@ public class ClanFileHandler {
 		Set<String> clandata = data.getKeys(false);
 		if (clandata.size() != 0) {
 			for (String uuid : clandata) {
-				List<UUID> members = new ArrayList<UUID>();
-				for (String s : data.getStringList(uuid + ".members")) {
+				ConfigurationSection section = data.getConfigurationSection(uuid);
+				List<UUID> members = new ArrayList<>();
+				for (String s : section.getStringList("members")) {
 					members.add(UUID.fromString(s));
 				}
-				Clan created = new Clan(UUID.fromString(uuid), data.getString(uuid + ".name"),
-						data.getString(uuid + ".displayname"), UUID.fromString(data.getString(uuid + ".leader")),
-						members);
+				Clan created = new Clan(UUID.fromString(uuid), section.getString("name"),
+						section.getString("displayname"), UUID.fromString(section.getString("leader")), members);
 				CF_Clans.getClanManager().addClan(created);
 			}
 		}
@@ -54,21 +55,21 @@ public class ClanFileHandler {
 			data.set(s, null);
 		}
 		for (Clan c : clans) {
-			String path = c.getClanUUID().toString() + ".";
-			data.set(path + "name", c.getName());
-			data.set(path + "displayname", c.getClanDisplayName());
-			data.set(path + "leader", c.getLeader().toString());
-			List<String> members = new ArrayList<String>();
-			for(UUID uuid: c.getMembers()) {
+			ConfigurationSection section = data.createSection(c.getClanUUID().toString());
+			section.set("name", c.getName());
+			section.set("displayname", c.getClanDisplayName());
+			section.set("leader", c.getLeader().toString());
+			List<String> members = new ArrayList<>();
+			for (UUID uuid : c.getMembers()) {
 				members.add(uuid.toString());
 			}
-			data.set(path + "members", members);
+			section.set("members", members);
 		}
 		saveConfigFile(async);
 	}
 
 	private void saveConfigFile(boolean async) {
-		if (async == true) {
+		if (async) {
 			Bukkit.getScheduler().runTaskAsynchronously(pl, new Runnable() {
 				@Override
 				public void run() {

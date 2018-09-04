@@ -19,7 +19,7 @@ public class Clan {
 	private UUID clanUUID;
 	private String displayname;
 	private UUID leader;
-	private List<UUID> members = new ArrayList<UUID>();
+	private List<UUID> members = new ArrayList<>();
 
 	public Clan(String name, UUID leader) {
 		clanUUID = UUID.randomUUID();

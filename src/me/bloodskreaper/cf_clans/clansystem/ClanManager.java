@@ -7,7 +7,7 @@ import java.util.UUID;
 import me.bloodskreaper.cf_clans.CF_Clans;
 
 public class ClanManager {
-	private List<Clan> clans = new ArrayList<Clan>();
+	private List<Clan> clans = new ArrayList<>();
 
 	public boolean addClan(Clan clan) {
 		return clans.add(clan);

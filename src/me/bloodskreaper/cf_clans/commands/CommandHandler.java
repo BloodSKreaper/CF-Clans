@@ -12,7 +12,7 @@ import me.bloodskreaper.cf_clans.CF_Clans;
 
 public class CommandHandler implements CommandExecutor {
 
-	private static HashMap<String, CommandInterface> commands = new HashMap<String, CommandInterface>();
+	private static HashMap<String, CommandInterface> commands = new HashMap<>();
 
 	public void register(String name, CommandInterface cmd) {
 		commands.put(name, cmd);
