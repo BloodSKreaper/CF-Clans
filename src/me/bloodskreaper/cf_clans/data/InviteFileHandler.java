@@ -22,7 +22,7 @@ public class InviteFileHandler {
 	public InviteFileHandler(Plugin plugin) {
 		pl = plugin;
 		datafile = new File(pl.getDataFolder(), "InviteFile.yml");
-		if (!datafile.exists() == true && datafile.isDirectory()) {
+		if (!datafile.exists() && datafile.isDirectory()) {
 			try {
 				datafile.createNewFile();
 			} catch (IOException e) {

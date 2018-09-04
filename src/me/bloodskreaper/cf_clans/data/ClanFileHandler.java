@@ -23,7 +23,7 @@ public class ClanFileHandler {
 	public ClanFileHandler(Plugin plugin) {
 		pl = plugin;
 		datafile = new File(pl.getDataFolder(), "ClanData.yml");
-		if (!datafile.exists() == true && datafile.isDirectory()) {
+		if (!datafile.exists() && datafile.isDirectory()) {
 			try {
 				datafile.createNewFile();
 			} catch (IOException e) {
