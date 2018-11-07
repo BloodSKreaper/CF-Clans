@@ -26,7 +26,7 @@ public class ClanManager {
 		Clan result = null;
 		for (Clan c : clans) {
 			for (UUID id : c.getMembers()) {
-				
+
 				if (id.equals(uuid)) {
 					result = c;
 					break;
